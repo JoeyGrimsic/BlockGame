@@ -16,11 +16,18 @@ repositories {
 }
 
 dependencies {
-    // Use JUnit test framework.
-    testImplementation libs.junit
+    // LWJGL dependencies
+    implementation 'org.lwjgl:lwjgl:3.3.1'
+    implementation 'org.lwjgl:lwjgl-glfw:3.3.1'
+    implementation 'org.lwjgl:lwjgl-opengl:3.3.1'
 
-    // This dependency is used by the application.
-    implementation libs.guava
+    // Native bindings for your OS
+    runtimeOnly 'org.lwjgl:lwjgl:3.3.1:natives-macos-arm64'
+    runtimeOnly 'org.lwjgl:lwjgl-glfw:3.3.1:natives-macos-arm64'
+    runtimeOnly 'org.lwjgl:lwjgl-opengl:3.3.1:natives-macos-arm64'
+
+    // JUnit for testing
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -31,6 +38,8 @@ java {
 }
 
 application {
-    // Define the main class for the application.
     mainClass = 'org.example.App'
+
+    // Add JVM argument for macOS
+    applicationDefaultJvmArgs = ['-XstartOnFirstThread']
 }

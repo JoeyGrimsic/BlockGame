@@ -1,4 +1,4 @@
-package com.mygame;
+package org.example;
 
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
@@ -10,7 +10,7 @@ public class App {
     private long window;
 
     public static void main(String[] args) {
-        new Main().run();
+        new App().run();
     }
 
     public void run() {
