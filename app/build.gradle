@@ -53,5 +53,5 @@ application {
     if (osName.contains("mac")) {
         applicationDefaultJvmArgs = ['-XstartOnFirstThread']
     }
-    mainClass = 'org.example.App'
+    mainClass = 'game.App'
 }
