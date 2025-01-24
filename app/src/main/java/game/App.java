@@ -59,13 +59,22 @@ public class App {
         GLFW.glfwShowWindow(window);
     }
 
+    double TIME = 0.0;
+    double DEGREES = Math.PI/180.0;
     private void loop() {
-        // This line is critical. It will load all OpenGL functions (via LWJGL)
+                // This line is critical. It will load all OpenGL functions (via LWJGL)
         GL.createCapabilities();
 
         // Run until the user wants to close the window
         while (!GLFW.glfwWindowShouldClose(window)) {
+            TIME++;
+
+            float RED_VALUE = (float)Math.abs(Math.sin((DEGREES * TIME)));
+            float GREEN_VALUE = (float)Math.abs(Math.sin((DEGREES * TIME + 90)));
+            float BLUE_VALUE = (float)Math.abs(Math.sin((DEGREES * TIME + 180)));
+
             // Poll for window events
+            System.out.println("GREEN_VALUE: " + GREEN_VALUE);
             GLFW.glfwPollEvents();
 
             // Set the clear color to black
@@ -76,16 +85,16 @@ public class App {
             GL11.glBegin(GL11.GL_TRIANGLES);
 
             // Red vertex
-            GL11.glColor3f(1.0f, 0.0f, 0.0f);
-            GL11.glVertex2f(-0.5f, -0.5f);
+            GL11.glColor3f(RED_VALUE, GREEN_VALUE, BLUE_VALUE);
+            GL11.glVertex3f(-0.5f, -0.5f, 0f);
 
             // Green vertex
-            GL11.glColor3f(0.0f, 1.0f, 0.0f);
-            GL11.glVertex2f(0.5f, -0.5f);
+            GL11.glColor3f(RED_VALUE + 0.3f, GREEN_VALUE + 0.3f, BLUE_VALUE + 0.3f);
+            GL11.glVertex3f(GREEN_VALUE, -0.5f, 0f);
 
             // Blue vertex
-            GL11.glColor3f(0.0f, 0.0f, 1.0f);
-            GL11.glVertex2f(0.0f, 0.5f);
+            GL11.glColor3f(RED_VALUE + 0.6f, GREEN_VALUE + 0.6f, BLUE_VALUE + 0.6f);
+            GL11.glVertex3f(0.0f, BLUE_VALUE, 0f);
 
             GL11.glEnd();
 
