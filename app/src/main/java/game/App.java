@@ -6,6 +6,8 @@ import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
+import static org.joml.Math.PI; // Example for a specific method/constant
+
 @SuppressWarnings("unused")
 public class App {
 
