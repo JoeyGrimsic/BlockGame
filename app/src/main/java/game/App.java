@@ -1,10 +1,12 @@
 package game;
 
+import static org.joml.Math.*;
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
+@SuppressWarnings("unused")
 public class App {
 
     private long window;
@@ -43,10 +45,9 @@ public class App {
         GLFWVidMode vidMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
         if (vidMode != null) {
             GLFW.glfwSetWindowPos(
-                window,
-                (vidMode.width() - 800) / 2,
-                (vidMode.height() - 600) / 2
-            );
+                    window,
+                    (vidMode.width() - 800) / 2,
+                    (vidMode.height() - 600) / 2);
         }
 
         // Make the OpenGL context current
@@ -59,19 +60,20 @@ public class App {
         GLFW.glfwShowWindow(window);
     }
 
-    double TIME = 0.0;
-    double DEGREES = Math.PI/180.0;
+    float TIME = 0f;
+    float DEGREES = PI_f / 180f;
+
     private void loop() {
-                // This line is critical. It will load all OpenGL functions (via LWJGL)
+        // This line is critical. It will load all OpenGL functions (via LWJGL)
         GL.createCapabilities();
 
         // Run until the user wants to close the window
         while (!GLFW.glfwWindowShouldClose(window)) {
             TIME++;
 
-            float RED_VALUE = (float)Math.abs(Math.sin((DEGREES * TIME)));
-            float GREEN_VALUE = (float)Math.abs(Math.sin((DEGREES * TIME + 90)));
-            float BLUE_VALUE = (float)Math.abs(Math.sin((DEGREES * TIME + 180)));
+            float RED_VALUE = abs(sin(DEGREES * TIME));
+            float GREEN_VALUE = abs(sin(DEGREES * TIME * 1 / 3f));
+            float BLUE_VALUE = abs(sin(DEGREES * TIME) * 2 / 3f);
 
             // Poll for window events
             System.out.println("GREEN_VALUE: " + GREEN_VALUE);
@@ -103,4 +105,3 @@ public class App {
         }
     }
 }
-
